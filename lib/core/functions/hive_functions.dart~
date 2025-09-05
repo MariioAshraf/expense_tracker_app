@@ -1,0 +1,18 @@
+import 'package:hive/hive.dart';
+import '../../constants.dart';
+import '../../features/auth/models/user_model.dart';
+
+class HiveFunctions {
+
+
+  static Future<void> saveUserId(String userId) async {
+    final box = Hive.box<String>(kUsersCollection);
+    await box.put(kUsersCollection, userId);
+  }
+
+  static Future<String?> getUserId() async {
+    final box = Hive.box<String>(kUsersCollection);
+    return box.get(kUsersCollection);
+  }
+
+}

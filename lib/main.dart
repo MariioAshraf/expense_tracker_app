@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'core/routing/app_router.dart';
 import 'core/routing/routes.dart';
-import 'features/auth/models/user_model.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -14,9 +13,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await Hive.initFlutter();
-  Hive.registerAdapter(UserModelAdapter());
   setupServiceLocator();
-
   runApp(const MyApp());
 }
 

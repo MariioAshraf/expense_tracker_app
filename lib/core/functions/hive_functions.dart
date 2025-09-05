@@ -1,18 +1,14 @@
 import 'package:hive/hive.dart';
 import '../../constants.dart';
-import '../../features/auth/models/user_model.dart';
 
 class HiveFunctions {
-
-
-  static Future<void> saveUser(UserModel user) async {
-    final box = Hive.box<UserModel>(kUsersCollection);
-    await box.put(kUsersCollection, user);
+  static Future<void> saveUserId(String userId) async {
+    final box = Hive.box<String>(kUsersBox);
+    await box.put(kUserId, userId);
   }
 
-  static Future<UserModel?> getUser() async {
-    final box = Hive.box<UserModel>(kUsersCollection);
-    return box.get(kUsersCollection);
+  static Future<String?> getUserId() async {
+    final box = Hive.box<String>(kUsersBox);
+    return box.get(kUserId);
   }
-
 }
