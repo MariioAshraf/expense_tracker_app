@@ -1,5 +1,6 @@
 import 'package:expense_tracker_app/core/routing/routes.dart';
 import 'package:expense_tracker_app/features/auth/login/presentation/manager/login_bloc.dart';
+// import 'package:expense_tracker_app/features/auth/sign_up/presentation/views/sign_up_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/login/domain/use_cases/login_use_case.dart';
@@ -16,6 +17,10 @@ class AppRouter {
             child: const LoginView(),
           ),
         );
+      // case Routes.signUpView:
+      //   return MaterialPageRoute(
+      //     builder: (_) => const SignUpView(),
+      //   );
       default:
         return null;
     }

@@ -1,12 +1,15 @@
 import 'package:expense_tracker_app/core/utils/assets.dart';
+import 'package:expense_tracker_app/core/utils/extensions.dart';
 import 'package:expense_tracker_app/features/auth/login/presentation/manager/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../../core/routing/routes.dart';
 import '../../../../../../core/theming/app_styles.dart';
 import '../../../../../../core/utils/spacing.dart';
 import '../../../../../../core/widgets/app_text_button.dart';
 import 'login_bloc_listener.dart';
 import 'login_form.dart';
+import 'package:flutter/gestures.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
@@ -42,7 +45,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
             Image.asset(
               AssetsData.loginExpenseLogo,
               width: 180.w,
-
             ),
             verticalSpacing(60),
             Text(
@@ -78,6 +80,22 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               ),
             ),
             verticalSpacing(40),
+            Text.rich(TextSpan(
+              children: [
+                TextSpan(
+                  text: 'Don\'t have an account yet? ',
+                  style: AppTextStyles.font14DarkBlueMedium
+                      .copyWith(fontSize: 13.sp),
+                ),
+                TextSpan(
+                    text: ' Sign Up',
+                    style: AppTextStyles.font13BlueRegular,
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        context.pushReplacementNamed(Routes.signUpView);
+                      }),
+              ],
+            ))
           ],
         ),
       ),
