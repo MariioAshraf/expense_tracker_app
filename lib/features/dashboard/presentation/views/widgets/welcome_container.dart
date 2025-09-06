@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/theming/app_colors.dart';
 
-class WelcomeContainerBlocListener extends StatelessWidget {
-  const WelcomeContainerBlocListener({super.key, required this.height});
+class WelcomeContainer extends StatelessWidget {
+  const WelcomeContainer({super.key, required this.height});
 
   final double height;
 

@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../manager/dash_board_bloc.dart';
 import 'build_user_profile_image.dart';
 
-class ChangeProfilePhotoBlocBuilder extends StatelessWidget {
-  const ChangeProfilePhotoBlocBuilder({
+class ChangeProfilePhotoBlocConsumer extends StatelessWidget {
+  const ChangeProfilePhotoBlocConsumer({
     super.key,
   });
 

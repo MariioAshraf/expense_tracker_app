@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/theming/app_styles.dart';
 import '../../../../../core/utils/spacing.dart';
 import '../../manager/dash_board_bloc.dart';
-import 'change_profile_photo_bloc_builder.dart';
+import 'change_profile_photo_bloc_consumer.dart';
 
 class UserNameAndImageRow extends StatelessWidget {
   const UserNameAndImageRow({super.key});
@@ -18,7 +18,7 @@ class UserNameAndImageRow extends StatelessWidget {
           onTap: () {
             context.read<DashBoardBloc>().add(PickUserImageEvent());
           },
-          child: ChangeProfilePhotoBlocBuilder(),
+          child: ChangeProfilePhotoBlocConsumer(),
         ),
         horizontalSpacing(20),
         Column(
