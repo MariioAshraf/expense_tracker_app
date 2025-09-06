@@ -15,8 +15,9 @@ class WelcomeContainer extends StatelessWidget {
     return Container(
       height: height * 0.38,
       decoration: BoxDecoration(
-          color: AppColorsManager.mainBlue,
-          borderRadius: BorderRadius.circular(16)),
+        color: AppColorsManager.mainBlue,
+        borderRadius: BorderRadius.circular(16),
+      ),
       child: Padding(
         padding: EdgeInsets.only(
           top: height * 0.07,
