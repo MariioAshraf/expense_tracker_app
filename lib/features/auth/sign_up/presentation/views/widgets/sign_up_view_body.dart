@@ -1,0 +1,51 @@
+import 'package:expense_tracker_app/features/auth/sign_up/presentation/views/widgets/sign_up_bloc_consumer.dart';
+import 'package:expense_tracker_app/features/auth/sign_up/presentation/views/widgets/sign_up_form.dart';
+import 'package:expense_tracker_app/features/auth/sign_up/presentation/views/widgets/terms_and_conditions_text.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../../core/theming/app_styles.dart';
+import '../../../../../../core/utils/assets.dart';
+import '../../../../../../core/utils/spacing.dart';
+import 'already_have_an_account_text.dart';
+
+class SignUpViewBody extends StatelessWidget {
+  const SignUpViewBody({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 40.h),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.asset(
+              AssetsData.loginExpenseLogo,
+              width: 180.w,
+            ),
+            verticalSpacing(40),
+            Text(
+              'SignUp',
+              style: AppTextStyles.font32BlackBold,
+            ),
+            verticalSpacing(30),
+            const SignUpForm(),
+            verticalSpacing(22),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                'Forgot Password?',
+                style: AppTextStyles.font13BlueRegular,
+              ),
+            ),
+            verticalSpacing(22),
+            const SignUpBlocConsumer(),
+            verticalSpacing(20),
+            const TermsAndConditionsText(),
+            verticalSpacing(30),
+            const AlreadyHaveAnAccountAndSignInText(),
+          ],
+        ),
+      ),
+    );
+  }
+}

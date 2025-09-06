@@ -44,7 +44,7 @@ class LoginBlocListener extends StatelessWidget {
           // homeCubit.userModel = state.userModel;
           // homeCubit.userId = state.userModel.uId!;
           context.pop();
-          context.pushReplacementNamed(Routes.homeView);
+          context.pushReplacementNamed(Routes.dashBoardView);
         }
         if (state is LoginLoading) {
           showDialog(

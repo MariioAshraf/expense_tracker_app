@@ -11,4 +11,8 @@ class HiveFunctions {
     final box = Hive.box<String>(kUsersBox);
     return box.get(kUserId);
   }
+
+  static Future<void> openBox() async {
+    await Hive.openBox<String>(kUsersBox);
+  }
 }
