@@ -37,8 +37,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     final result = await loginUseCase.call(loginInputBodyModel);
 
-    result.fold(
-      (failure) => emit(LoginFailure(errMessage: failure.message)),
+    await result.fold(
+      (failure) {
+        emit(LoginFailure(errMessage: failure.message));
+      },
       (userModel) async {
         userId = userModel.uId;
         await HiveFunctions.saveUserId(userModel.uId!);
