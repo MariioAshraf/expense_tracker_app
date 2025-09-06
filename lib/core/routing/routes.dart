@@ -1,5 +1,5 @@
 class Routes {
   static const loginView = '/loginView';
-  static const dashBoardView = '/homeView';
+  static const dashBoardView = '/dashBoardView';
   static const signUpView = '/signUpView';
 }

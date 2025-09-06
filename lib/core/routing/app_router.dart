@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/login/domain/use_cases/login_use_case.dart';
 import '../../features/auth/login/presentation/views/login_view.dart';
+import '../../features/dashboard/presentation/manager/dash_board_bloc.dart';
 import '../di/dependency_injection.dart';
 
 class AppRouter {
@@ -24,7 +25,7 @@ class AppRouter {
         );
       case Routes.dashBoardView:
         return MaterialPageRoute(
-          builder: (_) => const DashBoardView(),
+          builder: (_) => DashBoardView(),
         );
       default:
         return null;
