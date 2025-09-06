@@ -1,4 +1,4 @@
-import 'package:expense_tracker_app/features/dashboard/presentation/views/widgets/welcome_container_bloc_listener.dart';
+import 'package:expense_tracker_app/features/dashboard/presentation/views/widgets/welcome_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/theming/app_colors.dart';
@@ -15,7 +15,7 @@ class DashBoardViewBody extends StatelessWidget {
           height: height * 0.48,
           child: Stack(
             children: [
-              WelcomeContainerBlocListener(
+              WelcomeContainer(
                 height: height,
               ),
               Positioned(
