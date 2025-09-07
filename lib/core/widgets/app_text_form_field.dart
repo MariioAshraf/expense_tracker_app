@@ -19,6 +19,8 @@ class AppTextFormField extends StatelessWidget {
     this.controller,
     this.validator,
     this.onChanged,
+    this.readOnly,
+    this.prefixIcon,
   });
 
   final String hintText;
@@ -34,10 +36,13 @@ class AppTextFormField extends StatelessWidget {
   final InputBorder? focusedBorder;
   final InputBorder? enabledBorder;
   final Function(String?)? validator;
+  final bool? readOnly;
+  final Widget? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: readOnly ?? false,
       onChanged: onChanged,
       validator: (value) {
         if (validator == null) {
@@ -49,8 +54,9 @@ class AppTextFormField extends StatelessWidget {
       cursorOpacityAnimates: true,
       cursorColor: courserColor ?? AppColorsManager.mainBlue,
       obscureText: obscureText ?? false,
-      style: inputTextStyle ?? AppTextStyles.font14DarkBlueMedium,
+      style: inputTextStyle ?? AppTextStyles.font14BlackMedium,
       decoration: InputDecoration(
+        prefixIcon: prefixIcon,
         errorBorder: OutlineInputBorder(
             borderSide: const BorderSide(
               color: Colors.red,
@@ -64,8 +70,7 @@ class AppTextFormField extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(6)),
         filled: true,
-        fillColor: backGroundColor ?? AppColorsManager.moreLighterGrey,
-        isDense: true,
+        fillColor: backGroundColor ?? AppColorsManager.basicGrey,
         contentPadding: contentPadding ??
             EdgeInsets.symmetric(
               horizontal: 18.w,

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:expense_tracker_app/features/auth/models/user_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../data/repos/dash_board_repo.dart';
@@ -13,7 +14,8 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
 
   late UserModel userModel;
   final DashBoardRepo dashBoardRepo;
-
+  final categoryNameController = TextEditingController();
+  final categoryCodeController = TextEditingController();
   DashBoardBloc({required this.dashBoardRepo}) : super(DashBoardInitial()) {
     on<PickUserImageEvent>(_onPickUserImage);
     on<ChangeUserImageEvent>(_onChangeUserImage);

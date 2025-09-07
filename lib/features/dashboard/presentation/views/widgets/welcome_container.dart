@@ -1,7 +1,5 @@
-import 'package:expense_tracker_app/features/dashboard/presentation/manager/dash_board_bloc.dart';
 import 'package:expense_tracker_app/features/dashboard/presentation/views/widgets/user_name_and_image_row.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/theming/app_colors.dart';
 

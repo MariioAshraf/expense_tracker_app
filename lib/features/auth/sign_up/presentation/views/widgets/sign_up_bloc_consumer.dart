@@ -36,7 +36,7 @@ class SignUpBlocConsumer extends StatelessWidget {
                   },
                   child: Text(
                     'Got it',
-                    style: AppTextStyles.font14DarkBlueMedium,
+                    style: AppTextStyles.font14BlackMedium,
                   ),
                 )
               ],
@@ -83,7 +83,7 @@ void _showSuccessMessage(BuildContext context) {
     SnackBar(
       content: Text(
         'Account created successfully',
-        style: AppTextStyles.font14DarkBlueMedium,
+        style: AppTextStyles.font14BlackMedium,
       ),
       backgroundColor: Colors.green,
       behavior: SnackBarBehavior.floating,

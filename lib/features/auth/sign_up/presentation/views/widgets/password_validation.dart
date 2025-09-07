@@ -57,7 +57,7 @@ Widget passwordValidationRow({required String text, required bool hasValidated})
       ),
       Text(
         text,
-        style: AppTextStyles.font14DarkBlueMedium.copyWith(
+        style: AppTextStyles.font14BlackMedium.copyWith(
           fontSize: 13,
           decoration: hasValidated ? TextDecoration.lineThrough : null,
           color: hasValidated ? Colors.grey : AppColorsManager.darkBlue,

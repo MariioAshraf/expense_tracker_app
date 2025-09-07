@@ -23,6 +23,7 @@ class AppTextButton extends StatelessWidget {
   final double? buttonHeight;
   final double? horizontalPadding;
   final double? verticalPadding;
+
   // final TextStyle? textStyle;
   final Color? backGroundColor;
 
@@ -43,8 +44,8 @@ class AppTextButton extends StatelessWidget {
         ),
         padding: WidgetStateProperty.all(
           EdgeInsets.symmetric(
-            horizontal: horizontalPadding?.w ?? 12.w,
-            vertical: verticalPadding?.h ?? 14.h,
+            horizontal: horizontalPadding?.w ?? 10.w,
+            vertical: verticalPadding?.h ?? 10.h,
           ),
         ),
         backgroundColor: WidgetStateProperty.all(

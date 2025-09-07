@@ -33,7 +33,7 @@ class LoginBlocListener extends StatelessWidget {
                   },
                   child: Text(
                     'Got it',
-                    style: AppTextStyles.font14DarkBlueMedium,
+                    style: AppTextStyles.font14BlackMedium,
                   ),
                 ),
               ],

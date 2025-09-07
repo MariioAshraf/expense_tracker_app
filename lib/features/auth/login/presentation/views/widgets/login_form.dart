@@ -30,6 +30,12 @@ class _LoginFormState extends State<LoginForm> {
           ),
           verticalSpacing(4),
           AppTextFormField(
+            backGroundColor: AppColorsManager.basicGrey,
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.transparent,
+              ),
+            ),
             validator: (value) {
               if (value == null ||
                   value.isEmpty ||
@@ -47,6 +53,12 @@ class _LoginFormState extends State<LoginForm> {
           ),
           verticalSpacing(4),
           AppTextFormField(
+            backGroundColor: AppColorsManager.basicGrey,
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.transparent,
+              ),
+            ),
             controller: loginBloc.passwordController,
             validator: (value) {
               if (value == null || value.isEmpty) {
