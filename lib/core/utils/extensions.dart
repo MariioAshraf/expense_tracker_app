@@ -32,7 +32,7 @@ extension ShowSnackBar on BuildContext {
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(
       {required String message, Color? color}) {
     final snackBar = SnackBar(
-      content: Text(message, style: AppTextStyles.font14DarkBlueMedium),
+      content: Text(message, style: AppTextStyles.font14BlackMedium),
       backgroundColor: color ?? AppColorsManager.mainBlue,
     );
     return ScaffoldMessenger.of(this).showSnackBar(snackBar);

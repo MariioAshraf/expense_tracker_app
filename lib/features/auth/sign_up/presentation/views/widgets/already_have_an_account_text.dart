@@ -18,7 +18,7 @@ class AlreadyHaveAnAccountAndSignInText extends StatelessWidget {
             TextSpan(
               text: 'Already have an account? ',
               style:
-                  AppTextStyles.font14DarkBlueMedium.copyWith(fontSize: 13.sp),
+                  AppTextStyles.font14BlackMedium.copyWith(fontSize: 13.sp),
             ),
             TextSpan(
                 text: ' Sign In',

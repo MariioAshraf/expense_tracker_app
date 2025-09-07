@@ -84,7 +84,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               children: [
                 TextSpan(
                   text: 'Don\'t have an account yet? ',
-                  style: AppTextStyles.font14DarkBlueMedium
+                  style: AppTextStyles.font14BlackMedium
                       .copyWith(fontSize: 13.sp),
                 ),
                 TextSpan(

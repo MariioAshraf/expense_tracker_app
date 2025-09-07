@@ -1,6 +1,9 @@
 import 'package:expense_tracker_app/core/services/firestore_service.dart';
 import 'package:expense_tracker_app/core/services/supabase_storage_service.dart';
+import 'package:expense_tracker_app/features/add_transaction/data/repos/currency_repo.dart';
 import 'package:get_it/get_it.dart';
+import '../../features/add_transaction/data/repos/transaction_repo_impl.dart';
+import '../../features/add_transaction/domain/use_cases/add_transaction_use_case.dart';
 import '../../features/auth/login/data/repos/login_repo_impl.dart';
 import '../../features/auth/login/domain/use_cases/login_use_case.dart';
 import '../../features/auth/sign_up/data/repos/sign_up_repo_impl.dart';
@@ -24,4 +27,9 @@ void setupServiceLocator() {
     storageService: SupabaseStorageService(),
     storeService: FirestoreService(),
   ));
+  // transaction repo dependencies
+  getIt.registerSingleton<TransactionRepoImpl>(TransactionRepoImpl());
+  getIt.registerSingleton<CurrencyRepo>(CurrencyRepo());
+  getIt.registerSingleton<AddTransactionUseCase>(AddTransactionUseCase(
+      getIt<TransactionRepoImpl>(), getIt<CurrencyRepo>()));
 }

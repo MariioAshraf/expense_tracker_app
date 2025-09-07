@@ -7,12 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'constants.dart';
-import 'core/functions/hive_functions.dart';
 import 'core/routing/app_router.dart';
 import 'core/routing/routes.dart';
 import 'core/utils/bloc_observer.dart';
 import 'core/utils/supabase_initialization.dart';
-import 'features/dashboard/data/repos/dash_board_repo.dart';
+import 'features/add_transaction/data/models/transaction_model.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -22,7 +21,9 @@ void main() async {
   );
   await supabaseInitialization();
   await Hive.initFlutter();
-  await HiveFunctions.openBox();
+  Hive.registerAdapter(TransactionModelAdapter());
+  await Hive.openBox<String>(kUsersBox);
+  await Hive.openBox<TransactionModel>(kTransactionsBox);
   setupServiceLocator();
   Bloc.observer = AppBlocObserver();
   runApp(const MyApp());
