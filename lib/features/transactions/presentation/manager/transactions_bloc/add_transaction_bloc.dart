@@ -1,15 +1,15 @@
-import 'package:expense_tracker_app/features/add_transaction/data/models/transaction_model.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/use_cases/add_transaction_use_case.dart';
+import '../../../data/models/transaction_model.dart';
+import '../../../domain/use_cases/add_transaction_use_case.dart';
 
 part 'add_transaction_event.dart';
 
-part 'add_transaction_state.dart';
+part 'add_transactions_state.dart';
 
-class AddTransactionBloc
-    extends Bloc<AddTransactionEvent, AddTransactionState> {
+class AddTransactionsBloc
+    extends Bloc<AddTransactionsEvent, AddTransactionsState> {
   final transactionTypeController = TextEditingController();
   final categoryNameController = TextEditingController();
   final categoryIconController = TextEditingController();
@@ -18,10 +18,10 @@ class AddTransactionBloc
   final dateController = TextEditingController();
   final receiptController = TextEditingController();
 
-  static AddTransactionBloc get(context) => BlocProvider.of(context);
+  static AddTransactionsBloc get(context) => BlocProvider.of(context);
   final AddTransactionUseCase addTransactionUseCase;
 
-  AddTransactionBloc(this.addTransactionUseCase)
+  AddTransactionsBloc(this.addTransactionUseCase)
       : super(AddTransactionInitial()) {
     on<AddTransactionRequestedEvent>(_onAddNewTransaction);
     on<PickFileEvent>(_onPickFile);
@@ -29,7 +29,7 @@ class AddTransactionBloc
 
   Future<void> _onAddNewTransaction(
     AddTransactionRequestedEvent event,
-    Emitter<AddTransactionState> emit,
+    Emitter<AddTransactionsState> emit,
   ) async {
     emit(AddTransactionLoadingState());
     TransactionModel transactionModel = TransactionModel(
@@ -48,7 +48,7 @@ class AddTransactionBloc
 
   Future<void> _onPickFile(
     PickFileEvent event,
-    Emitter<AddTransactionState> emit,
+    Emitter<AddTransactionsState> emit,
   ) async {
     final result = await FilePicker.platform.pickFiles();
     if (result != null && result.files.single.path != null) {
@@ -63,5 +63,7 @@ class AddTransactionBloc
     categoryNameController.dispose();
     categoryIconController.dispose();
     transactionTypeController.dispose();
+    receiptController.dispose();
+    currencyController.dispose();
   }
 }

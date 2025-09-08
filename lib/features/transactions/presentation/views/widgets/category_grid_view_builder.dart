@@ -1,9 +1,9 @@
-import 'package:expense_tracker_app/features/add_transaction/presentation/views/widgets/add_category_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../dashboard/presentation/manager/dash_board_bloc.dart';
 import '../../../data/models/category_model.dart';
-import '../../manager/add_transaction_bloc.dart';
+import '../../manager/transactions_bloc/add_transaction_bloc.dart';
+import 'add_category_bottom_sheet.dart';
 import 'category_item.dart';
 
 class CategoryGridViewBuilder extends StatefulWidget {
@@ -19,7 +19,7 @@ class _CategoryGridViewBuilderState extends State<CategoryGridViewBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    final addTransactionBloc = AddTransactionBloc.get(context);
+    final addTransactionBloc = AddTransactionsBloc.get(context);
     final dashBoardBloc = DashBoardBloc.get(context);
     final categoryNameController = addTransactionBloc.categoryNameController;
     final defaultCategories = CategoryModel.defaultCategories;
@@ -61,7 +61,7 @@ class _CategoryGridViewBuilderState extends State<CategoryGridViewBuilder> {
   }
 
   GestureDetector _buildAddCategoryButton(BuildContext context,
-      DashBoardBloc dashBoardBloc, AddTransactionBloc addTransactionBloc) {
+      DashBoardBloc dashBoardBloc, AddTransactionsBloc addTransactionBloc) {
     return GestureDetector(
       onTap: () {
         _showAddCategorySheet(context, dashBoardBloc, addTransactionBloc);
@@ -84,7 +84,7 @@ class _CategoryGridViewBuilderState extends State<CategoryGridViewBuilder> {
   }
 
   void _showAddCategorySheet(BuildContext context, DashBoardBloc dashBoardBloc,
-      AddTransactionBloc addTransactionBloc) {
+      AddTransactionsBloc addTransactionBloc) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,

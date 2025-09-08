@@ -4,17 +4,17 @@ import 'package:expense_tracker_app/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../manager/add_transaction_bloc.dart';
+import '../../manager/transactions_bloc/add_transaction_bloc.dart';
 
-class AttachReceiptBlocBuilder extends StatelessWidget {
-  const AttachReceiptBlocBuilder({super.key});
+class AddTransactionBlocConsumer extends StatelessWidget {
+  const AddTransactionBlocConsumer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AddTransactionBloc, AddTransactionState>(
+    return BlocConsumer<AddTransactionsBloc, AddTransactionsState>(
       listener: (context, state) {
         if (state is AddTransactionSuccessState) {
-          context.pop();
+          context.pop(true);
         }
       },
       builder: (context, state) => state is TransactionFilePickedSuccessState
@@ -31,7 +31,7 @@ class AttachReceiptBlocBuilder extends StatelessWidget {
             )
           : GestureDetector(
               onTap: () {
-                context.read<AddTransactionBloc>().add(PickFileEvent());
+                context.read<AddTransactionsBloc>().add(PickFileEvent());
               },
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),

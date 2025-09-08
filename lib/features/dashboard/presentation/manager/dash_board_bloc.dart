@@ -11,11 +11,11 @@ part 'dash_board_state.dart';
 
 class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
   static DashBoardBloc get(context) => BlocProvider.of(context);
-
   late UserModel userModel;
   final DashBoardRepo dashBoardRepo;
   final categoryNameController = TextEditingController();
   final categoryCodeController = TextEditingController();
+
   DashBoardBloc({required this.dashBoardRepo}) : super(DashBoardInitial()) {
     on<PickUserImageEvent>(_onPickUserImage);
     on<ChangeUserImageEvent>(_onChangeUserImage);
@@ -24,7 +24,9 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
   String? profileImagePath;
 
   Future<void> _onPickUserImage(
-      PickUserImageEvent event, Emitter<DashBoardState> emit) async {
+    PickUserImageEvent event,
+    Emitter<DashBoardState> emit,
+  ) async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {

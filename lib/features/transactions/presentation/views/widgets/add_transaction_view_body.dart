@@ -1,22 +1,22 @@
 import 'package:expense_tracker_app/core/utils/spacing.dart';
 import 'package:expense_tracker_app/core/widgets/app_text_button.dart';
 import 'package:expense_tracker_app/core/widgets/app_text_form_field.dart';
-import 'package:expense_tracker_app/features/add_transaction/presentation/views/widgets/amount_and_currency_conversion_text_form_field.dart';
-import 'package:expense_tracker_app/features/add_transaction/presentation/views/widgets/date_picker.dart';
-import 'package:expense_tracker_app/features/add_transaction/presentation/views/widgets/transaction_type_text_form_field.dart';
+import 'package:expense_tracker_app/features/transactions/presentation/views/widgets/transaction_type_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/theming/app_styles.dart';
-import '../../manager/add_transaction_bloc.dart';
-import 'attach_receipt_bloc_builder.dart';
-import 'category_grid_view_Builder.dart';
+import '../../manager/transactions_bloc/add_transaction_bloc.dart';
+import 'amount_and_currency_conversion_text_form_field.dart';
+import 'add_transaction_bloc_consumer.dart';
+import 'category_grid_view_builder.dart';
+import 'date_picker.dart';
 
 class AddTransactionViewBody extends StatelessWidget {
   const AddTransactionViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final addTransactionBloc = AddTransactionBloc.get(context);
+    final addTransactionBloc = AddTransactionsBloc.get(context);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: SingleChildScrollView(
@@ -44,7 +44,7 @@ class AddTransactionViewBody extends StatelessWidget {
               child: DatePicker(),
             ),
             _label('Attach Receipt'),
-            AttachReceiptBlocBuilder(),
+            AddTransactionBlocConsumer(),
             verticalSpacing(10),
             _label('Pick a Category'),
             CategoryGridViewBuilder(),
