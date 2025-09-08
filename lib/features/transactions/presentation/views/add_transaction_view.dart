@@ -1,9 +1,8 @@
 import 'package:expense_tracker_app/core/utils/extensions.dart';
-import 'package:expense_tracker_app/features/add_transaction/presentation/views/widgets/add_transaction_view_body.dart';
+import 'package:expense_tracker_app/features/transactions/presentation/views/widgets/add_transaction_view_body.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../core/theming/app_styles.dart';
-import '../manager/add_transaction_bloc.dart';
+import '../manager/transactions_bloc/add_transaction_bloc.dart';
 
 class AddTransactionView extends StatefulWidget {
   const AddTransactionView({super.key});
@@ -13,11 +12,10 @@ class AddTransactionView extends StatefulWidget {
 }
 
 class _AddTransactionViewState extends State<AddTransactionView> {
-  late AddTransactionBloc addTransactionBloc;
-
+  late AddTransactionsBloc addTransactionBloc;
   @override
   void initState() {
-    addTransactionBloc = AddTransactionBloc.get(context);
+    addTransactionBloc = AddTransactionsBloc.get(context);
     super.initState();
   }
 
@@ -45,7 +43,8 @@ class _AddTransactionViewState extends State<AddTransactionView> {
         ),
       ),
       backgroundColor: Colors.white,
-      body: SafeArea(child: AddTransactionViewBody()),
+      body: SafeArea(
+          child: AddTransactionViewBody()),
     );
   }
 }

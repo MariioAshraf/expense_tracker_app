@@ -1,9 +1,9 @@
 part of 'add_transaction_bloc.dart';
 
 @immutable
-sealed class AddTransactionEvent {}
+sealed class AddTransactionsEvent {}
 
-class AddTransactionRequestedEvent extends AddTransactionEvent {
+class AddTransactionRequestedEvent extends AddTransactionsEvent {
   final double amount;
   final String currency;
   final DateTime date;
@@ -23,4 +23,5 @@ class AddTransactionRequestedEvent extends AddTransactionEvent {
   });
 }
 
-final class PickFileEvent extends AddTransactionEvent {}
+final class PickFileEvent extends AddTransactionsEvent {}
+

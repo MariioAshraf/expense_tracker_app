@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/theming/app_styles.dart';
 import '../../../../../core/utils/spacing.dart';
-import '../../manager/add_transaction_bloc.dart';
+import '../../manager/transactions_bloc/add_transaction_bloc.dart';
 
 class DatePicker extends StatefulWidget {
   const DatePicker({
@@ -21,25 +21,38 @@ class DatePickerState extends State<DatePicker> {
 
   @override
   void initState() {
-    _dateController = context.read<AddTransactionBloc>().dateController;
+    _dateController = context.read<AddTransactionsBloc>().dateController;
     super.initState();
   }
 
   Future<void> _pickDueDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(), // Default date
-      firstDate: DateTime.now(), // The earliest date
-      lastDate: DateTime(2100), // The latest date
+      initialDate: DateTime.now(), // التاريخ الافتراضي
+      firstDate: DateTime(2000),   // أقدم تاريخ ممكن
+      lastDate: DateTime.now().add(
+        const Duration(days: 30),
+      ), // تاريخ النهاردة + 30 يوم
     );
 
     if (picked != null && picked != _selectedDate) {
+      final now = DateTime.now();
+      final pickedWithTime = DateTime(
+        picked.year,
+        picked.month,
+        picked.day,
+        now.hour,
+        now.minute,
+        now.second,
+      );
+
       setState(() {
-        _dateController.text = picked.toIso8601String();
-        _selectedDate = picked;
+        _selectedDate = pickedWithTime;
+        _dateController.text = _selectedDate!.toIso8601String();
       });
     }
   }
+
 
   @override
   Widget build(BuildContext context) {

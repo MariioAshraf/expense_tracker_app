@@ -11,7 +11,7 @@ import 'core/routing/app_router.dart';
 import 'core/routing/routes.dart';
 import 'core/utils/bloc_observer.dart';
 import 'core/utils/supabase_initialization.dart';
-import 'features/add_transaction/data/models/transaction_model.dart';
+import 'features/transactions/data/models/transaction_model.dart';
 import 'firebase_options.dart';
 
 void main() async {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/widgets/app_text_form_field.dart';
-import '../../manager/add_transaction_bloc.dart';
+import '../../manager/transactions_bloc/add_transaction_bloc.dart';
 
 class AmountAndCurrencyConversionTextFormField extends StatefulWidget {
   const AmountAndCurrencyConversionTextFormField({super.key});
@@ -18,7 +18,7 @@ class _AmountAndCurrencyConversionTextFormFieldState
 
   @override
   void initState() {
-    currencyController = context.read<AddTransactionBloc>().currencyController;
+    currencyController = context.read<AddTransactionsBloc>().currencyController;
     currencyController.text = "EGP";
     super.initState();
   }
@@ -51,7 +51,7 @@ class _AmountAndCurrencyConversionTextFormFieldState
                 currencyController.text,
             textAlign: TextAlign.center,
           ))),
-      controller: context.read<AddTransactionBloc>().amountController,
+      controller: context.read<AddTransactionsBloc>().amountController,
       hintText: 'Amount',
       enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
