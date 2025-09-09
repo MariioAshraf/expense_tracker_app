@@ -1,10 +1,11 @@
+import 'package:expense_tracker_app/core/theming/app_colors.dart';
 import 'package:expense_tracker_app/features/dashboard/presentation/views/widgets/user_name_and_image_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../core/theming/app_colors.dart';
+import 'filters_container.dart';
 
-class WelcomeContainer extends StatelessWidget {
-  const WelcomeContainer({super.key, required this.height});
+class WelcomeAndFiltersContainer extends StatelessWidget {
+  const WelcomeAndFiltersContainer({super.key, required this.height});
 
   final double height;
 
@@ -20,8 +21,16 @@ class WelcomeContainer extends StatelessWidget {
         padding: EdgeInsets.only(
           top: height * 0.07,
           left: 20.w,
+          right: 20.w,
         ),
-        child: UserNameAndImageRow(),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const UserNameAndImageRow(),
+            const FiltersContainer(),
+          ],
+        ),
       ),
     );
   }

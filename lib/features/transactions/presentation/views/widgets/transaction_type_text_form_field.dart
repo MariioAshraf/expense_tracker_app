@@ -1,32 +1,68 @@
 import 'package:expense_tracker_app/core/widgets/app_text_form_field.dart';
 import 'package:flutter/material.dart';
+import '../../../../../constants.dart';
+import '../../../domain/entities/filters.dart';
 import '../../manager/transactions_bloc/add_transaction_bloc.dart';
 
-class TransactionTypeTextFormField extends StatelessWidget {
-  const TransactionTypeTextFormField({
-    super.key,
-  });
+class TransactionTypeTextFormField extends StatefulWidget {
+  const TransactionTypeTextFormField({super.key});
 
   @override
+  State<TransactionTypeTextFormField> createState() =>
+      _TransactionTypeTextFormFieldState();
+}
+
+class _TransactionTypeTextFormFieldState
+    extends State<TransactionTypeTextFormField> {
+  @override
   Widget build(BuildContext context) {
-    final transactionTypeController =
-        AddTransactionsBloc.get(context).transactionTypeController;
+    final bloc = AddTransactionsBloc.get(context);
+    final transactionTypeController = bloc.transactionTypeController;
+
     return AppTextFormField(
       hintText: 'Type',
       controller: transactionTypeController,
       readOnly: true,
       suffixIcon: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
+        child: DropdownButton<TransactionTypeFilter>(
+          dropdownColor: Colors.white,
           hint: const Text("Select"),
-          items: const [
-            DropdownMenuItem(value: "Income", child: Text("Income")),
-            DropdownMenuItem(value: "Expense", child: Text("Expense")),
-          ],
-          onChanged: (value) {
-            transactionTypeController.text = value!;
+          value: _getEnumFromText(transactionTypeController.text),
+          items: TransactionTypeFilter.values.map((filter) {
+            return DropdownMenuItem<TransactionTypeFilter>(
+              value: filter,
+              child: Text(_mapEnumToText(filter)),
+            );
+          }).toList(),
+          onChanged: (filter) {
+            setState(() {
+              if (filter != null) {
+                transactionTypeController.text = _mapEnumToText(filter);
+              }
+            });
           },
         ),
       ),
     );
+  }
+
+  String _mapEnumToText(TransactionTypeFilter filter) {
+    switch (filter) {
+      case TransactionTypeFilter.income:
+        return kIncome;
+      case TransactionTypeFilter.expense:
+        return kExpense;
+    }
+  }
+
+  TransactionTypeFilter? _getEnumFromText(String text) {
+    switch (text) {
+      case kIncome:
+        return TransactionTypeFilter.income;
+      case kExpense:
+        return TransactionTypeFilter.expense;
+      default:
+        return null;
+    }
   }
 }

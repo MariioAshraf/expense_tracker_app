@@ -14,6 +14,7 @@ import 'core/routing/routes.dart';
 import 'core/utils/bloc_observer.dart';
 import 'core/utils/supabase_initialization.dart';
 import 'features/transactions/data/models/transaction_model.dart';
+import 'features/transactions/domain/entities/filters.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -24,12 +25,14 @@ void main() async {
   await supabaseInitialization();
   await Hive.initFlutter();
   Hive.registerAdapter(TransactionModelAdapter());
+  Hive.registerAdapter(TransactionTypeFilterAdapter());
   Hive.registerAdapter(UserModelAdapter());
   await Hive.openBox<UserModel>(kUsersBox);
   await Hive.openBox<TransactionModel>(kTransactionsBox);
   final user = await HiveFunctions.getUserModel();
   setupServiceLocator();
   Bloc.observer = AppBlocObserver();
+  await ScreenUtil.ensureScreenSize();
   runApp(MyApp(
     user: user,
   ));
@@ -51,7 +54,8 @@ class MyApp extends StatelessWidget {
         ),
         child: MaterialApp(
           initialRoute: user == null ? Routes.loginView : Routes.dashBoardView,
-          onGenerateRoute: (settings) => AppRouter().generateRoute(settings, user: user),
+          onGenerateRoute: (settings) =>
+              AppRouter().generateRoute(settings, user: user),
           debugShowCheckedModeBanner: false,
         ),
       ),

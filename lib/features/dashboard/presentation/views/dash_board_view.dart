@@ -4,8 +4,10 @@ import 'package:expense_tracker_app/features/dashboard/presentation/views/widget
 import 'package:expense_tracker_app/features/transactions/presentation/manager/get_transactions_bloc/get_transactions_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../constants.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../auth/models/user_model.dart';
+import '../../../transactions/domain/entities/filters.dart';
 import '../manager/dash_board_bloc.dart';
 
 class DashBoardView extends StatefulWidget {
@@ -29,8 +31,22 @@ class _DashBoardViewState extends State<DashBoardView> {
     super.initState();
   }
 
+  TransactionDateFilter? _mapStringToDateFilter(String value) {
+    switch (value) {
+      case transactionDateFilterThisMonth:
+        return TransactionDateFilter.thisMonth;
+      case transactionDateFilterLast7Days:
+        return TransactionDateFilter.last7Days;
+      default:
+        return null;
+    }
+  }
+
   _loadTransactions() {
-    _getTransactionsBloc.add(LoadTransactionsEvent(page: 0, pageSize: 10));
+    final filter =
+        _mapStringToDateFilter(_getTransactionsBloc.dateController.text);
+    _getTransactionsBloc
+        .add(LoadTransactionsEvent(page: 0, pageSize: 10, dateFilter: filter));
   }
 
   @override

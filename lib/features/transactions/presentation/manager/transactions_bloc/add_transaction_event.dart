@@ -7,7 +7,7 @@ class AddTransactionRequestedEvent extends AddTransactionsEvent {
   final double amount;
   final String currency;
   final DateTime date;
-  final String type;
+  final TransactionTypeFilter type;
   final String categoryName;
   final int categoryIcon;
   final String? receiptPath;
