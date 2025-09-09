@@ -25,15 +25,15 @@ class _CategoryGridViewBuilderState extends State<CategoryGridViewBuilder> {
     final defaultCategories = CategoryModel.defaultCategories;
 
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.25,
+      height: 0.25.sh,
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
         itemCount: defaultCategories.length + 1,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisSpacing: 20.w,
-          mainAxisSpacing: 5.h,
+          mainAxisSpacing: 12.h,
           crossAxisCount: 3,
-          childAspectRatio: 1.2,
+          childAspectRatio: 1.1,
         ),
         itemBuilder: (context, index) {
           if (index < defaultCategories.length) {
@@ -67,16 +67,21 @@ class _CategoryGridViewBuilderState extends State<CategoryGridViewBuilder> {
         _showAddCategorySheet(context, dashBoardBloc, addTransactionBloc);
       },
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircleAvatar(
-            radius: 30,
+            radius: 30.r, // responsive
             backgroundColor: Colors.teal.withAlpha(130),
-            child: Icon(Icons.add, color: Colors.teal, size: 28),
+            child:
+                Icon(Icons.add, color: Colors.teal, size: 28.sp), // responsive
           ),
-          SizedBox(height: 6),
+          SizedBox(height: 6.h),
           Text(
             "Add Category",
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            style: TextStyle(
+              fontSize: 14.sp, // responsive
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ],
       ),
@@ -88,12 +93,18 @@ class _CategoryGridViewBuilderState extends State<CategoryGridViewBuilder> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (context) => Container(
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(10.r)),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)),
           ),
-          child: const AddCategoryBottomSheet()),
+          child: const AddCategoryBottomSheet(),
+        ),
+      ),
     ).whenComplete(() {
       addTransactionBloc.categoryNameController.text =
           dashBoardBloc.categoryNameController.text;

@@ -5,8 +5,8 @@ sealed class GetTransactionsEvent {}
 class LoadTransactionsEvent extends GetTransactionsEvent {
   final int page;
   final int pageSize;
-  final String? typeFilter;
-  final String? dateFilter;
+  final TransactionTypeFilter? typeFilter;
+  final TransactionDateFilter? dateFilter;
 
   LoadTransactionsEvent({
     required this.page,

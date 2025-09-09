@@ -3,6 +3,7 @@ import '../../../../core/errors/failure.dart';
 import '../../../../core/use_cases/use_case.dart';
 import '../../data/models/transaction_model.dart';
 import '../../data/repos/transaction_repo_impl.dart';
+import '../entities/filters.dart';
 
 class GetTransactionsUseCase
     extends UseCase<List<TransactionModel>, GetTransactionsParams> {
@@ -30,8 +31,8 @@ class GetTransactionsUseCase
 class GetTransactionsParams {
   final int page;
   final int pageSize;
-  final String? typeFilter;
-  final String? dateFilter;
+  final TransactionTypeFilter? typeFilter;
+  final TransactionDateFilter? dateFilter;
 
   GetTransactionsParams({
     required this.page,

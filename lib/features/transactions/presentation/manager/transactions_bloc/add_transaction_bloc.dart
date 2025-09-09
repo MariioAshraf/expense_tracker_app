@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/functions/hive_functions.dart';
 import '../../../data/models/transaction_model.dart';
+import '../../../domain/entities/filters.dart';
 import '../../../domain/use_cases/add_transaction_use_case.dart';
 
 part 'add_transaction_event.dart';
@@ -44,9 +45,7 @@ class AddTransactionsBloc
     );
     final result = await addTransactionUseCase.call(transactionModel);
     result.fold((failure) => emit(AddTransactionErrorState(failure.message)),
-        (convertedAmount) {
-      HiveFunctions.updateUserTotalExpensesAndIncome(
-          event.type, convertedAmount);
+        (_) {
       emit(AddTransactionSuccessState());
     });
   }

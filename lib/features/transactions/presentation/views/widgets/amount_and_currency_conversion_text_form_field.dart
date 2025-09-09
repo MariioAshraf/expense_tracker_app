@@ -33,15 +33,18 @@ class _AmountAndCurrencyConversionTextFormFieldState
   @override
   Widget build(BuildContext context) {
     return AppTextFormField(
-      suffixIcon: DropdownButton<String>(
-        hint: const Text("Currency"),
-        items: currencies,
-        onChanged: (value) {
-          setState(() {
-            // selectedCurrency = value!;
-            currencyController.text = value!;
-          });
-        },
+      suffixIcon: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          value:  currencyController.text,
+          hint: const Text("Currency"),
+          items: currencies,
+          onChanged: (value) {
+            setState(() {
+              // selectedCurrency = value!;
+              currencyController.text = value!;
+            });
+          },
+        ),
       ),
       prefixIcon: SizedBox(
           height: 5.h,

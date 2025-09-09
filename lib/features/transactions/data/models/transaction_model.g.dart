@@ -22,7 +22,7 @@ class TransactionModelAdapter extends TypeAdapter<TransactionModel> {
       currency: fields[2] as String,
       convertedAmount: fields[3] as double?,
       date: fields[4] as DateTime,
-      type: fields[5] as String,
+      type: fields[5] as TransactionTypeFilter,
       categoryName: fields[6] as String,
       categoryIcon: fields[7] as int,
       receiptPath: fields[8] as String?,

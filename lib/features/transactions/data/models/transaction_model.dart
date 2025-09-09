@@ -1,6 +1,8 @@
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../domain/entities/filters.dart';
+
 part 'transaction_model.g.dart';
 
 @HiveType(typeId: 0)
@@ -21,7 +23,7 @@ class TransactionModel extends HiveObject {
   final DateTime date;
 
   @HiveField(5)
-  final String type;
+  final TransactionTypeFilter type;
 
   @HiveField(6)
   final String categoryName;

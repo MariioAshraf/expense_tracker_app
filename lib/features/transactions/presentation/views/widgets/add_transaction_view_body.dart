@@ -4,7 +4,9 @@ import 'package:expense_tracker_app/core/widgets/app_text_form_field.dart';
 import 'package:expense_tracker_app/features/transactions/presentation/views/widgets/transaction_type_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../constants.dart';
 import '../../../../../core/theming/app_styles.dart';
+import '../../../domain/entities/filters.dart';
 import '../../manager/transactions_bloc/add_transaction_bloc.dart';
 import 'amount_and_currency_conversion_text_form_field.dart';
 import 'add_transaction_bloc_consumer.dart';
@@ -55,7 +57,10 @@ class AddTransactionViewBody extends StatelessWidget {
                       double.parse(addTransactionBloc.amountController.text),
                   currency: addTransactionBloc.currencyController.text,
                   date: DateTime.parse(addTransactionBloc.dateController.text),
-                  type: addTransactionBloc.transactionTypeController.text,
+                  type: addTransactionBloc.transactionTypeController.text ==
+                          kIncome
+                      ? TransactionTypeFilter.income
+                      : TransactionTypeFilter.expense,
                   categoryName: addTransactionBloc.categoryNameController.text,
                   categoryIcon:
                       int.parse(addTransactionBloc.categoryIconController.text),

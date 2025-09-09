@@ -4,6 +4,10 @@ part of 'get_transactions_bloc.dart';
 sealed class GetTransactionsState {}
 
 final class GetTransactionsInitial extends GetTransactionsState {}
+final class CalculateTotalsSuccess extends GetTransactionsState {
+  final Totals totals;
+  CalculateTotalsSuccess(this.totals);
+}
 
 class GetTransactionsLoading extends GetTransactionsState {}
 
