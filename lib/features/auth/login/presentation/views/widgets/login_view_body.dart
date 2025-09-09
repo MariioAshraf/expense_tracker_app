@@ -76,7 +76,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               },
               child: Text(
                 'Login',
-                style: AppTextStyles.font16WhiteSemiBold,
+                style: AppTextStyles.font18WhiteSemiBold,
               ),
             ),
             verticalSpacing(40),

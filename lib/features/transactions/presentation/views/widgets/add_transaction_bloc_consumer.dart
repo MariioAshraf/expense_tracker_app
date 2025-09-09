@@ -4,6 +4,7 @@ import 'package:expense_tracker_app/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../dashboard/presentation/manager/dash_board_bloc.dart';
 import '../../manager/transactions_bloc/add_transaction_bloc.dart';
 
 class AddTransactionBlocConsumer extends StatelessWidget {
@@ -15,6 +16,7 @@ class AddTransactionBlocConsumer extends StatelessWidget {
       listener: (context, state) {
         if (state is AddTransactionSuccessState) {
           context.pop(true);
+          context.read<DashBoardBloc>().add(UpdateUserEvent());
         }
       },
       builder: (context, state) => state is TransactionFilePickedSuccessState

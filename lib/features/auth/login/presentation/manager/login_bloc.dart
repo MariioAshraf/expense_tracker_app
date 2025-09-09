@@ -43,7 +43,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       },
       (userModel) async {
         userId = userModel.uId;
-        await HiveFunctions.saveUserId(userModel.uId!);
+        await HiveFunctions.saveUserModel(userModel);
         this.userModel = userModel;
         emit(LoginSuccess(userModel));
       },

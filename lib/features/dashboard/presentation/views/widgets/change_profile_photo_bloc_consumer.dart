@@ -18,7 +18,7 @@ class ChangeProfilePhotoBlocConsumer extends StatelessWidget {
           context.read<DashBoardBloc>().add(ChangeUserImageEvent());
         }
         if (state is ChangeProfilePhotoSuccess) {
-          context.read<DashBoardBloc>().userModel.profileImageUrl =
+          context.read<DashBoardBloc>().userModel!.profileImageUrl =
               state.profileImageUrl;
         }
       },
@@ -35,7 +35,7 @@ class ChangeProfilePhotoBlocConsumer extends StatelessWidget {
           context,
           radius: 30,
           profileImage:
-              context.read<DashBoardBloc>().userModel.profileImageUrl!,
+              context.read<DashBoardBloc>().userModel!.profileImageUrl!,
         );
       },
     );

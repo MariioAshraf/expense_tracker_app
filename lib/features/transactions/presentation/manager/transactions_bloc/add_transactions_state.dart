@@ -5,9 +5,7 @@ sealed class AddTransactionsState {}
 
 final class AddTransactionInitial extends AddTransactionsState {}
 
-final class AddTransactionSuccessState extends AddTransactionsState {
-
-}
+final class AddTransactionSuccessState extends AddTransactionsState {}
 
 final class AddTransactionErrorState extends AddTransactionsState {
   final String message;

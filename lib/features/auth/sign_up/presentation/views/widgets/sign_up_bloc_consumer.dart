@@ -69,7 +69,7 @@ class SignUpBlocConsumer extends StatelessWidget {
                 )
               : Text(
                   'Sign Up',
-                  style: AppTextStyles.font16WhiteSemiBold,
+                  style: AppTextStyles.font18WhiteSemiBold,
                 ),
         );
       },

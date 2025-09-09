@@ -2,6 +2,7 @@ import 'package:expense_tracker_app/core/utils/extensions.dart';
 import 'package:expense_tracker_app/features/auth/login/presentation/manager/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../../core/functions/hive_functions.dart';
 import '../../../../../../core/routing/routes.dart';
 import '../../../../../../core/theming/app_colors.dart';
 import '../../../../../../core/theming/app_styles.dart';
