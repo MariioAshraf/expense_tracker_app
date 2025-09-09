@@ -1,4 +1,5 @@
 import 'package:expense_tracker_app/core/di/dependency_injection.dart';
+import 'package:expense_tracker_app/features/auth/models/user_model.dart';
 import 'package:expense_tracker_app/features/dashboard/data/repos/dash_board_repo_impl.dart';
 import 'package:expense_tracker_app/features/dashboard/presentation/manager/dash_board_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'constants.dart';
+import 'core/functions/hive_functions.dart';
 import 'core/routing/app_router.dart';
 import 'core/routing/routes.dart';
 import 'core/utils/bloc_observer.dart';
@@ -22,15 +24,21 @@ void main() async {
   await supabaseInitialization();
   await Hive.initFlutter();
   Hive.registerAdapter(TransactionModelAdapter());
-  await Hive.openBox<String>(kUsersBox);
+  Hive.registerAdapter(UserModelAdapter());
+  await Hive.openBox<UserModel>(kUsersBox);
   await Hive.openBox<TransactionModel>(kTransactionsBox);
+  final user = await HiveFunctions.getUserModel();
   setupServiceLocator();
   Bloc.observer = AppBlocObserver();
-  runApp(const MyApp());
+  runApp(MyApp(
+    user: user,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, this.user});
+
+  final UserModel? user;
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +50,8 @@ class MyApp extends StatelessWidget {
           dashBoardRepo: getIt.get<DashBoardRepoImpl>(),
         ),
         child: MaterialApp(
-          initialRoute: Routes.loginView,
-          onGenerateRoute: AppRouter().generateRoute,
+          initialRoute: user == null ? Routes.loginView : Routes.dashBoardView,
+          onGenerateRoute: (settings) => AppRouter().generateRoute(settings, user: user),
           debugShowCheckedModeBanner: false,
         ),
       ),

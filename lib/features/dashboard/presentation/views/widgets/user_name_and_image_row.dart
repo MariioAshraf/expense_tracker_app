@@ -10,7 +10,7 @@ class UserNameAndImageRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<DashBoardBloc>().userModel;
+    final user = context.read<DashBoardBloc>().userModel!;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -28,7 +28,7 @@ class UserNameAndImageRow extends StatelessWidget {
             verticalSpacing(5),
             Text(
               '${user.name[0].toUpperCase()}${user.name.substring(1)}',
-              style: AppTextStyles.font16WhiteSemiBold,
+              style: AppTextStyles.font18WhiteSemiBold,
             ),
           ],
         ),

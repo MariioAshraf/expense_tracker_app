@@ -13,7 +13,7 @@ class AddTransactionUseCase extends UseCase<void, TransactionModel> {
   AddTransactionUseCase(this.transactionRepo, this.currencyRepo);
 
   @override
-  Future<Either<Failure, TransactionModel>> call(
+  Future<Either<Failure, double>> call(
       [TransactionModel? param]) async {
     final result = await currencyRepo.convertToUsd(
       param!.amount,
@@ -37,7 +37,7 @@ class AddTransactionUseCase extends UseCase<void, TransactionModel> {
         );
 
         await transactionRepo.saveTransactionLocally(newTransaction);
-        return Right(newTransaction);
+        return Right(convertedAmount);
       },
     );
   }

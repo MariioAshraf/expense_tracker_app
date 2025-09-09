@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:expense_tracker_app/core/functions/hive_functions.dart';
 import 'package:expense_tracker_app/features/auth/models/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,14 +12,16 @@ part 'dash_board_state.dart';
 
 class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
   static DashBoardBloc get(context) => BlocProvider.of(context);
-  late UserModel userModel;
+  UserModel? userModel;
   final DashBoardRepo dashBoardRepo;
   final categoryNameController = TextEditingController();
   final categoryCodeController = TextEditingController();
+  double balance = 0;
 
   DashBoardBloc({required this.dashBoardRepo}) : super(DashBoardInitial()) {
     on<PickUserImageEvent>(_onPickUserImage);
     on<ChangeUserImageEvent>(_onChangeUserImage);
+    on<UpdateUserEvent>(_updateUser);
   }
 
   String? profileImagePath;
@@ -35,6 +38,16 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
     }
   }
 
+  Future<void> _updateUser(
+      UpdateUserEvent event, Emitter<DashBoardState> emit) async {
+    userModel = await HiveFunctions.getUserModel();
+    emit(UpdateUserSuccess());
+  }
+
+  // Future<void> getUser() async {
+  //   userModel = await HiveFunctions.getUserModel();
+  // }
+
   Future<void> _onChangeUserImage(
       ChangeUserImageEvent event, Emitter<DashBoardState> emit) async {
     if (profileImagePath == null) {
@@ -46,7 +59,7 @@ class DashBoardBloc extends Bloc<DashBoardEvent, DashBoardState> {
 
     final result = await dashBoardRepo.changeUserProfileImage(
       File(profileImagePath!),
-      userModel.uId!,
+      userModel!.uId!,
     );
 
     result.fold(

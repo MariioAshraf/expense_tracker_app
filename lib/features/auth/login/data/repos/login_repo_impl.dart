@@ -31,7 +31,7 @@ class LoginRepoImpl implements LoginRepo {
     final usersCollection =
         FirebaseFirestore.instance.collection(kUsersCollection);
     final docSnapshot = await usersCollection.doc(uId).get();
-    final userModel = UserModel.fromJson(docSnapshot.data());
+    final userModel = UserModel.fromJson(docSnapshot.data()!);
     return userModel;
   }
 }

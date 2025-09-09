@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/functions/hive_functions.dart';
 import '../../../data/models/transaction_model.dart';
 import '../../../domain/use_cases/add_transaction_use_case.dart';
 
@@ -43,7 +44,11 @@ class AddTransactionsBloc
     );
     final result = await addTransactionUseCase.call(transactionModel);
     result.fold((failure) => emit(AddTransactionErrorState(failure.message)),
-        (_) => emit(AddTransactionSuccessState()));
+        (convertedAmount) {
+      HiveFunctions.updateUserTotalExpensesAndIncome(
+          event.type, convertedAmount);
+      emit(AddTransactionSuccessState());
+    });
   }
 
   Future<void> _onPickFile(

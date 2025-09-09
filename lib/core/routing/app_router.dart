@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/auth/login/domain/use_cases/login_use_case.dart';
 import '../../features/auth/login/presentation/views/login_view.dart';
+import '../../features/auth/models/user_model.dart';
 import '../../features/transactions/domain/use_cases/add_transaction_use_case.dart';
 import '../../features/transactions/domain/use_cases/get_transaction_use_case.dart';
 import '../../features/transactions/presentation/manager/get_transactions_bloc/get_transactions_bloc.dart';
@@ -14,7 +15,7 @@ import '../../features/transactions/presentation/views/add_transaction_view.dart
 import '../di/dependency_injection.dart';
 
 class AppRouter {
-  Route? generateRoute(RouteSettings settings) {
+  Route? generateRoute(RouteSettings settings ,{UserModel? user}) {
     switch (settings.name) {
       case Routes.loginView:
         return MaterialPageRoute(
@@ -34,7 +35,9 @@ class AppRouter {
               BlocProvider(
                 create: (context) =>
                     GetTransactionsBloc(getIt.get<GetTransactionsUseCase>()),
-                child: DashBoardView(),
+                child: DashBoardView(
+                  userModel: user,
+                ),
               ),
         );
       case Routes.addTransactionView:

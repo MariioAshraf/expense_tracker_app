@@ -5,9 +5,13 @@ import 'package:expense_tracker_app/features/transactions/presentation/manager/g
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/routing/routes.dart';
+import '../../../auth/models/user_model.dart';
+import '../manager/dash_board_bloc.dart';
 
 class DashBoardView extends StatefulWidget {
-  const DashBoardView({super.key});
+  const DashBoardView({super.key, this.userModel});
+
+  final UserModel? userModel;
 
   @override
   State<DashBoardView> createState() => _DashBoardViewState();
@@ -18,6 +22,9 @@ class _DashBoardViewState extends State<DashBoardView> {
 
   @override
   void initState() {
+    if (widget.userModel != null) {
+      context.read<DashBoardBloc>().userModel = widget.userModel;
+    }
     _getTransactionsBloc = context.read<GetTransactionsBloc>();
     super.initState();
   }
