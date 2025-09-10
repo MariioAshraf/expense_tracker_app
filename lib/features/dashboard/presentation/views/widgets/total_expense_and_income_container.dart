@@ -1,12 +1,10 @@
 import 'package:expense_tracker_app/features/dashboard/presentation/views/widgets/total_expense_row.dart';
 import 'package:expense_tracker_app/features/dashboard/presentation/views/widgets/total_income_row.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import '../../../../../core/theming/app_colors.dart';
 import '../../../../transactions/data/models/totals_model.dart';
-import '../../../../transactions/presentation/manager/get_transactions_bloc/get_transactions_bloc.dart';
 import 'animated_total_balance.dart';
 
 class TotalExpenseAndIncomeContainer extends StatelessWidget {

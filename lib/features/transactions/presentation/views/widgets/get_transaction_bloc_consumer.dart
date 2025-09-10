@@ -1,5 +1,4 @@
 import 'package:expense_tracker_app/core/utils/extensions.dart';
-import 'package:expense_tracker_app/features/transactions/data/models/transaction_model.dart';
 import 'package:expense_tracker_app/features/transactions/presentation/views/widgets/transactions_list_view_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker_app/features/transactions/presentation/manager/get_transactions_bloc/get_transactions_bloc.dart';
