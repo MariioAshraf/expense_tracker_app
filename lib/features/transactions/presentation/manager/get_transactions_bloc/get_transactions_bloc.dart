@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
 
 import '../../../data/models/totals_model.dart';
 import '../../../data/models/transaction_model.dart';
