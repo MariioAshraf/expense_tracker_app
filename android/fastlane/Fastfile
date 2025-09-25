@@ -13,7 +13,7 @@ platform :android do
         android_artifact_type: "APK",
         android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk",
         testers: "mariioashraf1@gmail.com",
-        release_notes: "First FastLane Firebase Distribution Stage Testing GitHub Actions"
+        release_notes: "Setup Android keystore signing for release builds"
       )
   end
 end
