@@ -55,7 +55,7 @@ class _DashBoardViewBodyState extends State<DashBoardViewBody> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Recent Expenses',
+                'Recent Transactions',
                 style: AppTextStyles.font18BlackBold,
               ),
               Text('see all ', style: AppTextStyles.font14BlackMedium)

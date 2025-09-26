@@ -2,6 +2,7 @@ import 'package:expense_tracker_app/core/utils/extensions.dart';
 import 'package:expense_tracker_app/core/utils/spacing.dart';
 import 'package:expense_tracker_app/core/widgets/app_text_button.dart';
 import 'package:expense_tracker_app/core/widgets/app_text_form_field.dart';
+import 'package:expense_tracker_app/features/dashboard/presentation/manager/dash_board_bloc.dart';
 import 'package:expense_tracker_app/features/transactions/presentation/views/widgets/transaction_type_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,8 +15,28 @@ import 'add_transaction_bloc_consumer.dart';
 import 'category_grid_view_builder.dart';
 import 'date_picker.dart';
 
-class AddTransactionViewBody extends StatelessWidget {
+class AddTransactionViewBody extends StatefulWidget {
   const AddTransactionViewBody({super.key});
+
+  @override
+  State<AddTransactionViewBody> createState() => _AddTransactionViewBodyState();
+}
+
+class _AddTransactionViewBodyState extends State<AddTransactionViewBody> {
+  late DashBoardBloc dashBoardBloc;
+
+  @override
+  void initState() {
+    dashBoardBloc = DashBoardBloc.get(context);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    dashBoardBloc.categoryNameController.text = '';
+    dashBoardBloc.categoryCodeController.text = '';
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

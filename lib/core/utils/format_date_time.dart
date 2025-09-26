@@ -2,19 +2,16 @@ import 'package:intl/intl.dart';
 
 String formatDateTime(DateTime createdAt) {
   final now = DateTime.now();
-  final difference = now.difference(createdAt);
+  final today = DateTime(now.year, now.month, now.day);
+  final yesterday = today.subtract(const Duration(days: 1));
+  final createdDay = DateTime(createdAt.year, createdAt.month, createdAt.day);
 
-  if (difference.inMinutes < 1) {
-    return "Just now";
-  } else if (difference.inMinutes < 60) {
-    return "${difference.inMinutes}m";
-  } else if (difference.inHours < 24) {
-    return DateFormat("h:mm a").format(createdAt);
-  } else if (difference.inDays < 7) {
-    return "${difference.inDays}d";
-  } else if (createdAt.year == now.year) {
-    return DateFormat("MMM d").format(createdAt);
+  if (createdDay == today) {
+    return "Today ${DateFormat("h:mm a").format(createdAt)}";
+  } else if (createdDay == yesterday) {
+    return "Yesterday ${DateFormat("h:mm a").format(createdAt)}";
   } else {
-    return DateFormat("MMM d, yyyy").format(createdAt);
+    final dayName = DateFormat("E").format(createdAt); // Mon, Tue ...
+    return "$dayName, ${DateFormat("MMM d h:mm a").format(createdAt)}";
   }
 }
