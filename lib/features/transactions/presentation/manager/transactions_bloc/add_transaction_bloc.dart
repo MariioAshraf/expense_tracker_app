@@ -69,4 +69,16 @@ class AddTransactionsBloc
     receiptController.dispose();
     currencyController.dispose();
   }
+
+  bool controllersValidation() {
+    if (amountController.text.isEmpty ||
+        currencyController.text.isEmpty ||
+        transactionTypeController.text.isEmpty ||
+        categoryNameController.text.isEmpty ||
+        categoryIconController.text.isEmpty ||
+        dateController.text.isEmpty) {
+      return false;
+    }
+    return true;
+  }
 }

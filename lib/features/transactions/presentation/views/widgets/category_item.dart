@@ -1,6 +1,8 @@
+import 'package:expense_tracker_app/core/utils/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../data/models/category_model.dart';
+
 class CategoryItem extends StatelessWidget {
   const CategoryItem({
     super.key,
@@ -17,9 +19,8 @@ class CategoryItem extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 30.r,
-          backgroundColor: isSelected
-              ? category.color.withAlpha(200)
-              : Colors.transparent,
+          backgroundColor:
+              isSelected ? category.color.withAlpha(200) : Colors.transparent,
           child: CircleAvatar(
             radius: 28.r,
             backgroundColor: category.color.withAlpha(70),
@@ -35,11 +36,10 @@ class CategoryItem extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 6),
+        verticalSpacing(6),
         Text(
           category.name,
-          style: const TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w500),
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
         ),
       ],
     );
