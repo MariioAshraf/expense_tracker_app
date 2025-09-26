@@ -99,10 +99,44 @@ class _AddCategoryBottomSheetState extends State<AddCategoryBottomSheet> {
                 style: AppTextStyles.font14WhiteRegular,
               ),
               onPressed: () {
-                context.pop();
+                if (categoryNameController.text.isNotEmpty &&
+                    selectedIcon != null) {
+                  context.pop();
+                } else {
+                  _showOverlayHint(context, "pick category and name");
+                }
               }),
         ],
       ),
     );
+  }
+
+  void _showOverlayHint(BuildContext context, String message) {
+    final overlay = Overlay.of(context);
+    final entry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: MediaQuery.of(context).size.height * 0.4,
+        left: MediaQuery.of(context).size.width * 0.2,
+        right: MediaQuery.of(context).size.width * 0.2,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.7),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              message,
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.white, fontSize: 14),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    overlay.insert(entry);
+    Future.delayed(const Duration(seconds: 2), () => entry.remove());
   }
 }

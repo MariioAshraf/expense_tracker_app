@@ -1,16 +1,62 @@
 # expense_tracker_app
 
-A new Flutter project.
+## Overview
 
-## Getting Started
+A Flutter application to track expenses and income.  
+The app allows users to add, view, and categorize transactions, with local storage using Hive.  
+It includes expense validation, currency handling, and export to PDF/CSV.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## Architecture & Structure
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Clean Architecture** (Domain, Data, Presentation layers).
+- **Repository Pattern** for data handling.
+- **Dependency Injection** using `flutter_bloc` & context.
+- Local database: **Hive**.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## State Management
+
+- **Bloc (flutter_bloc)** used for state management.
+- Cubits/Blocs handle UI logic and interact with Repositories.
+
+---
+
+## API Integration
+
+- Currently, no external API integration is used.
+- Currency and transactions are handled locally.
+- (Trade-off: the design allows plugging in API easily later).
+
+---
+
+## Pagination Strategy
+
+- Implemented **Local Pagination with Hive**.
+- Transactions are loaded in pages (e.g., 10 at a time) to improve performance instead of loading
+  all at once.
+
+---
+
+## UI Screenshots
+
+---
+
+## Trade-offs & Assumptions
+
+- No remote API: app works fully offline.
+- Hive chosen for simplicity and speed.
+- Pagination is local only (not API-driven).
+- Currency conversion mocked/stubbed.
+- Export to PDF implemented, CSV optional.
+
+---
+
+## How to Run the Project
+
+1. Clone the repository
+   ```bash
+   git clone <repo-link>
+
