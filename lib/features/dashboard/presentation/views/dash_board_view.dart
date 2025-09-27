@@ -53,18 +53,6 @@ class _DashBoardViewState extends State<DashBoardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("Dashboard"),
-      //   actions: [
-      //     IconButton(
-      //       icon: const Icon(Icons.picture_as_pdf),
-      //       onPressed: () async {
-      //         await TransactionsExportService.exportToPDF(
-      //             _getTransactionsBloc.allTransactions);
-      //       },
-      //     ),
-      //   ],
-      // ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColorsManager.mainBlue,
         onPressed: () async {
