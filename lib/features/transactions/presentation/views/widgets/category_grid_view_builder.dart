@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../core/utils/spacing.dart';
 import '../../../../dashboard/presentation/manager/dash_board_bloc.dart';
 import '../../../data/models/category_model.dart';
 import '../../manager/transactions_bloc/add_transaction_bloc.dart';
@@ -75,7 +76,7 @@ class _CategoryGridViewBuilderState extends State<CategoryGridViewBuilder> {
             child:
                 Icon(Icons.add, color: Colors.teal, size: 28.sp), // responsive
           ),
-          SizedBox(height: 6.h),
+          verticalSpacing(6),
           Text(
             "Add Category",
             style: TextStyle(

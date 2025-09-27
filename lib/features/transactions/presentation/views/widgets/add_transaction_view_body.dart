@@ -1,6 +1,8 @@
+import 'package:expense_tracker_app/core/utils/extensions.dart';
 import 'package:expense_tracker_app/core/utils/spacing.dart';
 import 'package:expense_tracker_app/core/widgets/app_text_button.dart';
 import 'package:expense_tracker_app/core/widgets/app_text_form_field.dart';
+import 'package:expense_tracker_app/features/dashboard/presentation/manager/dash_board_bloc.dart';
 import 'package:expense_tracker_app/features/transactions/presentation/views/widgets/transaction_type_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,8 +15,28 @@ import 'add_transaction_bloc_consumer.dart';
 import 'category_grid_view_builder.dart';
 import 'date_picker.dart';
 
-class AddTransactionViewBody extends StatelessWidget {
+class AddTransactionViewBody extends StatefulWidget {
   const AddTransactionViewBody({super.key});
+
+  @override
+  State<AddTransactionViewBody> createState() => _AddTransactionViewBodyState();
+}
+
+class _AddTransactionViewBodyState extends State<AddTransactionViewBody> {
+  late DashBoardBloc dashBoardBloc;
+
+  @override
+  void initState() {
+    dashBoardBloc = DashBoardBloc.get(context);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    dashBoardBloc.categoryNameController.text = '';
+    dashBoardBloc.categoryCodeController.text = '';
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,20 +74,7 @@ class AddTransactionViewBody extends StatelessWidget {
             CategoryGridViewBuilder(),
             AppTextButton(
               onPressed: () {
-                addTransactionBloc.add(AddTransactionRequestedEvent(
-                  amount:
-                      double.parse(addTransactionBloc.amountController.text),
-                  currency: addTransactionBloc.currencyController.text,
-                  date: DateTime.parse(addTransactionBloc.dateController.text),
-                  type: addTransactionBloc.transactionTypeController.text ==
-                          kIncome
-                      ? TransactionTypeFilter.income
-                      : TransactionTypeFilter.expense,
-                  categoryName: addTransactionBloc.categoryNameController.text,
-                  categoryIcon:
-                      int.parse(addTransactionBloc.categoryIconController.text),
-                  receiptPath: addTransactionBloc.receiptController.text,
-                ));
+                _handleSavingTransactionStates(addTransactionBloc, context);
               },
               child: Text('Save', style: AppTextStyles.font18WhiteRegular),
             ),
@@ -84,5 +93,45 @@ class AddTransactionViewBody extends StatelessWidget {
         style: AppTextStyles.font16BlackBold,
       ),
     );
+  }
+
+  _handleSavingTransactionStates(
+      AddTransactionsBloc addTransactionBloc, BuildContext context) {
+    if (addTransactionBloc.controllersValidation()) {
+      addTransactionBloc.add(AddTransactionRequestedEvent(
+        amount: double.parse(addTransactionBloc.amountController.text),
+        currency: addTransactionBloc.currencyController.text,
+        date: DateTime.parse(addTransactionBloc.dateController.text),
+        type: addTransactionBloc.transactionTypeController.text == kIncome
+            ? TransactionTypeFilter.income
+            : TransactionTypeFilter.expense,
+        categoryName: addTransactionBloc.categoryNameController.text,
+        categoryIcon: int.parse(addTransactionBloc.categoryIconController.text),
+        receiptPath: addTransactionBloc.receiptController.text,
+      ));
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          icon: const Icon(
+            Icons.error,
+            color: Colors.red,
+            size: 32,
+          ),
+          content: Text('Please fill all the fields'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                context.pop();
+              },
+              child: Text(
+                'Got it',
+                style: AppTextStyles.font14BlackMedium,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
   }
 }

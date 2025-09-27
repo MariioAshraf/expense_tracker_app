@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:expense_tracker_app/features/transactions/presentation/manager/get_transactions_bloc/get_transactions_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../dashboard/presentation/views/widgets/transaction_card.dart';
+
 class TransactionsListViewBuilder extends StatelessWidget {
   const TransactionsListViewBuilder({
     super.key,
@@ -22,9 +24,9 @@ class TransactionsListViewBuilder extends StatelessWidget {
       itemBuilder: (context, index) {
         if (index < transactions.length) {
           final tx = transactions[index];
-          return ListTile(
-            title: Text("${tx.categoryName} - ${tx.amount} ${tx.currency}"),
-            subtitle: Text(tx.date.toString()),
+          return TransactionCard(
+            transaction: tx,
+            index: index,
           );
         } else {
           final currentState = context.read<GetTransactionsBloc>().state;
