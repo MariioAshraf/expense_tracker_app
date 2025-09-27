@@ -3,9 +3,11 @@ import 'package:expense_tracker_app/features/transactions/presentation/views/wid
 import 'package:flutter/material.dart';
 import 'package:expense_tracker_app/features/transactions/presentation/manager/get_transactions_bloc/get_transactions_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../constants.dart';
 import '../../../domain/entities/filters.dart';
+import 'export_to_pdf_floating_action_button.dart';
 
 class GetTransactionsBlocConsumer extends StatefulWidget {
   const GetTransactionsBlocConsumer({super.key});
@@ -80,9 +82,18 @@ class _GetTransactionsBlocConsumerState
             return const Center(child: Text("No Transactions yet"));
           }
 
-          return TransactionsListViewBuilder(
-            scrollController: _scrollController,
-            transactions: transactions,
+          return Stack(
+            children: [
+              TransactionsListViewBuilder(
+                scrollController: _scrollController,
+                transactions: transactions,
+              ),
+              Positioned(
+                bottom: 16.h,
+                left: 16.w,
+                child: ExportToPDFFloatingButton(transactions: transactions),
+              ),
+            ],
           );
         }
 
@@ -101,5 +112,3 @@ class _GetTransactionsBlocConsumerState
     super.dispose();
   }
 }
-
-
