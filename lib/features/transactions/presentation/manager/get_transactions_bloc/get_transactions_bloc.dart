@@ -68,9 +68,9 @@ class GetTransactionsBloc
 
     for (final tx in transactions) {
       if (tx.type == TransactionTypeFilter.income) {
-        totalIncome += tx.amount;
+        totalIncome += tx.convertedAmount!;
       } else if (tx.type == TransactionTypeFilter.expense) {
-        totalExpense += tx.amount;
+        totalExpense += tx.convertedAmount!;
       }
     }
     final totals = Totals(
