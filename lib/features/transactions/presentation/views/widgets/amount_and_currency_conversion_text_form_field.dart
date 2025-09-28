@@ -33,9 +33,10 @@ class _AmountAndCurrencyConversionTextFormFieldState
   @override
   Widget build(BuildContext context) {
     return AppTextFormField(
+      keyboardType: TextInputType.number,
       suffixIcon: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
-          value:  currencyController.text,
+          value: currencyController.text,
           hint: const Text("Currency"),
           items: currencies,
           onChanged: (value) {
@@ -51,7 +52,7 @@ class _AmountAndCurrencyConversionTextFormFieldState
           width: 5.w,
           child: Center(
               child: Text(
-                currencyController.text,
+            currencyController.text,
             textAlign: TextAlign.center,
           ))),
       controller: context.read<AddTransactionsBloc>().amountController,

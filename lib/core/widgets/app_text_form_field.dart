@@ -21,6 +21,7 @@ class AppTextFormField extends StatelessWidget {
     this.onChanged,
     this.readOnly,
     this.prefixIcon,
+    this.keyboardType,
   });
 
   final String hintText;
@@ -37,11 +38,13 @@ class AppTextFormField extends StatelessWidget {
   final InputBorder? enabledBorder;
   final Function(String?)? validator;
   final bool? readOnly;
+  final TextInputType? keyboardType;
   final Widget? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: keyboardType,
       readOnly: readOnly ?? false,
       onChanged: onChanged,
       validator: (value) {

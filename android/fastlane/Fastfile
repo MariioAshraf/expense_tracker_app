@@ -13,7 +13,7 @@ platform :android do
         android_artifact_type: "APK",
         android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk",
         testers: "mariioashraf1@gmail.com",
-        release_notes: "Setup Android keystore signing for release builds"
+        release_notes: "Modified amount text field to accept numbers only and fixed the issue where total amount was not being calculated "
       )
   end
 end
