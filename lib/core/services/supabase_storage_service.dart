@@ -21,7 +21,7 @@ class SupabaseStorageService implements StorageService {
       return right(
           supabase.storage.from(kUsersCollection).getPublicUrl(fullPath));
     } on Exception catch (e) {
-      return left(Failure(e.toString()));
+      return left(SupabaseFailure(e.toString()));
     }
   }
 }

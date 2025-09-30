@@ -43,7 +43,7 @@ class AddTransactionsBloc
       categoryIcon: event.categoryIcon,
     );
     final result = await addTransactionUseCase.call(transactionModel);
-    result.fold((failure) => emit(AddTransactionErrorState(failure.message)),
+    result.fold((failure) => emit(AddTransactionFailureState(failure.message)),
         (_) {
       emit(AddTransactionSuccessState());
     });
