@@ -7,10 +7,10 @@ final class AddTransactionInitial extends AddTransactionsState {}
 
 final class AddTransactionSuccessState extends AddTransactionsState {}
 
-final class AddTransactionErrorState extends AddTransactionsState {
+final class AddTransactionFailureState extends AddTransactionsState {
   final String message;
 
-  AddTransactionErrorState(this.message);
+  AddTransactionFailureState(this.message);
 }
 
 final class AddTransactionLoadingState extends AddTransactionsState {}

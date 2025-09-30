@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'filters.g.dart';
 
-@HiveType(typeId: 1) // خليه ID مختلف عن TransactionModel
+@HiveType(typeId: 1)
 enum TransactionTypeFilter {
   @HiveField(0)
   income,
