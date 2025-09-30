@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Failure {
@@ -6,10 +7,15 @@ class Failure {
   const Failure(this.message);
 }
 
+class SupabaseFailure extends Failure {
+  SupabaseFailure(super.message);
+}
+
 class FirebaseAuthFailure extends Failure {
   FirebaseAuthFailure(super.message);
 
-  factory FirebaseAuthFailure.fromFirebaseAuthException(FirebaseAuthException e) {
+  factory FirebaseAuthFailure.fromFirebaseAuthException(
+      FirebaseAuthException e) {
     switch (e.code) {
       case 'weak-password':
         return FirebaseAuthFailure('The password provided is too weak.');
@@ -24,5 +30,39 @@ class FirebaseAuthFailure extends Failure {
       default:
         return FirebaseAuthFailure('Authentication error.');
     }
+  }
+}
+
+class ServerFailure extends Failure {
+  ServerFailure(super.message);
+
+  factory ServerFailure.fromDioException(DioException dioException) {
+    switch (dioException.type) {
+      case DioExceptionType.connectionTimeout:
+        return ServerFailure('Connection Timeout with ApiServer');
+      case DioExceptionType.sendTimeout:
+        return ServerFailure('Sent timeout Timeout with ApiServer');
+      case DioExceptionType.receiveTimeout:
+        return ServerFailure('Receive timeout Timeout with ApiServer');
+      case DioExceptionType.badCertificate:
+        return ServerFailure('Bad certificate');
+      case DioExceptionType.badResponse:
+        return ServerFailure.fromDioResponse(
+            dioException.response!.statusCode!, dioException.response!.data);
+      case DioExceptionType.cancel:
+        return ServerFailure('Request to ApiServer was canceled');
+      case DioExceptionType.connectionError:
+        return ServerFailure('No Internet Connection');
+
+      case DioExceptionType.unknown:
+        if (dioException.message?.contains('SocketException') != null) {
+          return ServerFailure('Connection error with Api');
+        }
+        return ServerFailure('UnExpected Error, please try again!');
+    }
+  }
+
+  factory ServerFailure.fromDioResponse(int statusCode, dynamic response) {
+    return ServerFailure(response['error-type']);
   }
 }

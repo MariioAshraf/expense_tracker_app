@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:expense_tracker_app/core/services/firestore_service.dart';
 import 'package:expense_tracker_app/core/services/supabase_storage_service.dart';
 import 'package:get_it/get_it.dart';
@@ -10,10 +11,13 @@ import '../../features/transactions/data/repos/currency_repo.dart';
 import '../../features/transactions/data/repos/transaction_repo_impl.dart';
 import '../../features/transactions/domain/use_cases/add_transaction_use_case.dart';
 import '../../features/transactions/domain/use_cases/get_transaction_use_case.dart';
+import '../networking/api_service.dart';
+import '../networking/dio_factory.dart';
 
 final getIt = GetIt.instance;
 
 void setupServiceLocator() {
+  Dio dio = DioFactory.getDio();
   // sign up repo dependencies
   getIt.registerSingleton<SignUpRepoImpl>(SignUpRepoImpl());
   getIt
@@ -30,7 +34,8 @@ void setupServiceLocator() {
   ));
   // transaction repo dependencies
   getIt.registerSingleton<TransactionRepoImpl>(TransactionRepoImpl());
-  getIt.registerSingleton<CurrencyRepo>(CurrencyRepo());
+  getIt.registerSingleton<ApiService>(ApiService(dio));
+  getIt.registerSingleton<CurrencyRepo>(CurrencyRepo(getIt<ApiService>()));
   getIt.registerSingleton<AddTransactionUseCase>(AddTransactionUseCase(
       getIt<TransactionRepoImpl>(), getIt<CurrencyRepo>()));
 
